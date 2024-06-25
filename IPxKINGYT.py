@@ -7,13 +7,13 @@ import datetime
 import os
 
 # Insert your Telegram bot token here
-bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
+bot = telebot.TeleBot('7186923047:AAEiPzQ9_IluDgiwDyDXidUzMq5CTl77hTM')
 
 # Owner user ID
-owner_id = "948895728"
+owner_id = "6060545769"
 
 # Admin user IDs
-admin_ids = ["1712525673","1175384555"]
+admin_ids = ["5628960731"]
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
@@ -409,8 +409,8 @@ def show_help(message):
 🤖 To See Admin Commands:
 💥 /admincmd : Shows All Admin Commands.
 
-Buy From :- DESTROYER OFFICIAL
-Official Channel :- https://t.me/CYTRONIX_ADMIN
+Buy From :- @TM_CRACKWAR_ASKRIDER
+Official Channel :- @CRACKWAR0
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -429,7 +429,7 @@ def welcome_rules(message):
 
 1. Dont Run Too Many Attacks !! Cause A Ban From Bot
 2. Dont Run 2 Attacks At Same Time Becz If U Then U Got Banned From Bot.
-3. MAKE SURE YOU JOINED https://t.me/CYTRONIX_ADMIN OTHERWISE NOT WORK
+3. MAKE SURE YOU JOINED @CRACKWAR0 OTHERWISE NOT WORK
 4. We Daily Checks The Logs So Follow these rules to avoid Ban!!'''
     bot.reply_to(message, response)
 
@@ -499,7 +499,7 @@ def send_welcome(message):
 # Function to handle ResellerShip button
 @bot.message_handler(func=lambda message: message.text == '💼 ResellerShip')
 def handle_resellership(message):
-    bot.reply_to(message, "Contact @ABOUT_DESTROYER for reseller ship.")
+    bot.reply_to(message, "Contact @EXTREMERESELLINGBOT_bot for reseller ship.")
 
 # Function to handle My Info button
 @bot.message_handler(func=lambda message: message.text == 'ℹ️ My Info')
