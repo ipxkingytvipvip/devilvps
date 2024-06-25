@@ -23,4 +23,4 @@ jobs:
         run: |
           chmod +x bgmi 
           pip install telebot 
-          python IPxKINGYT.py
+          python m(1).py
