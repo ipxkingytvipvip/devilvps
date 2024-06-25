@@ -10,7 +10,7 @@ import os
 bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
 
 # Owner user ID
-owner_id = "948895728"
+owner_id = ["948895728"]
 
 # Admin user IDs
 admin_ids = ["5628960731"]
