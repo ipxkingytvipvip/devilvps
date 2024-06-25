@@ -10,7 +10,7 @@ import os
 bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
 
 #IPxKINGYT
-owner_id = "948895728"
+owner_id = ["948895728"]
 
 # Admin user IDs
 admin_id = ["948895728","1712525673","1175384555"]
