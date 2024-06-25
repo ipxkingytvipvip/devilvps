@@ -8,6 +8,10 @@ import os
 
 # insert your Telegram bot token here
 bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
+
+#IPxKINGYT
+owner_id = "948895728"
+
 # Admin user IDs
 admin_id = ["948895728","1712525673","1175384555"]
 
@@ -25,6 +29,14 @@ def read_users():
             return file.read().splitlines()
     except FileNotFoundError:
         return []
+        
+        
+def read_admins():
+    try:
+        with open(ADMIN_FILE, "r") as file:
+            return file.read().splitlines()
+    except FileNotFoundError:
+        return []       
 
 # Function to read free user IDs and their credits from the file
 def read_free_users():
@@ -45,17 +57,14 @@ def read_free_users():
 
 # List to store allowed user IDs
 allowed_user_ids = read_users()
+admin_ids = read_admins()
 
 # Function to log command to the file
 def log_command(user_id, target, port, time):
-    admin_id = ["6266215827"]
     user_info = bot.get_chat(user_id)
-    if user_info.username:
-        username = "@" + user_info.username
-    else:
-        username = f"UserID: {user_id}"
+    username = "@" + user_info.username if user_info.username else f"UserID: {user_id}"
     
-    with open(LOG_FILE, "a") as file:  # Open in "append" mode
+    with open(LOG_FILE, "a") as file:
         file.write(f"Username: {username}\nTarget: {target}\nPort: {port}\nTime: {time}\n\n")
 
 
@@ -85,7 +94,7 @@ def record_command_logs(user_id, command, target=None, port=None, time=None):
     with open(LOG_FILE, "a") as file:
         file.write(log_entry + "\n")
 
-import datetime
+
 
 # Dictionary to store the approval expiry date for each user
 user_approval_expiry = {}
@@ -105,14 +114,14 @@ def get_remaining_approval_time(user_id):
 # Function to add or update user approval expiry date
 def set_approval_expiry_date(user_id, duration, time_unit):
     current_time = datetime.datetime.now()
-    if time_unit == "hour" or time_unit == "hours":
+    if time_unit in ["hour", "hours"]:
         expiry_date = current_time + datetime.timedelta(hours=duration)
-    elif time_unit == "day" or time_unit == "days":
+    elif time_unit in ["day", "days"]:
         expiry_date = current_time + datetime.timedelta(days=duration)
-    elif time_unit == "week" or time_unit == "weeks":
+    elif time_unit in ["week", "weeks"]:
         expiry_date = current_time + datetime.timedelta(weeks=duration)
-    elif time_unit == "month" or time_unit == "months":
-        expiry_date = current_time + datetime.timedelta(days=30 * duration)  # Approximation of a month
+    elif time_unit in ["month", "months"]:
+        expiry_date = current_time + datetime.timedelta(days=30 * duration)
     else:
         return False
     
@@ -158,13 +167,41 @@ def add_user(message):
 
     bot.reply_to(message, response)
 
+#COMMAND FOR ADDING ADMIN
+@bot.message_handler(commands=['addadmin'])
+def add_admin(message):
+    user_id = str(message.chat.id)
+    if user_id == owner_id:
+        command = message.text.split()
+        if len(command) > 1:
+            admin_to_add = command[1]
+            if admin_to_add not in admin_ids:
+                admin_ids.append(admin_to_add)
+                with open(ADMIN_FILE, "a") as file:
+                    file.write(f"{admin_to_add}\n")
+                response = f"Admin {admin_to_add} added successfully 👍."
+            else:
+                response = "Admin already exists 🤦‍♂️."
+        else:
+            response = "Please specify an admin ID to add 😘."
+    else:
+        response = "Only the Owner can run this command 😡."
+
+    bot.reply_to(message, response)
+
+
 # Command handler for retrieving user info
 @bot.message_handler(commands=['myinfo'])
 def get_user_info(message):
     user_id = str(message.chat.id)
     user_info = bot.get_chat(user_id)
     username = user_info.username if user_info.username else "N/A"
-    user_role = "Admin" if user_id in admin_id else "User"
+    if user_id == owner_id:
+     user_role = "Owner"
+    elif user_id in admin_ids:
+     user_role = "Admin"
+    else:
+     user_role = "User"
     remaining_time = get_remaining_approval_time(user_id)
     response = f"👤 Your Info:\n\n🆔 User ID: <code>{user_id}</code>\n📝 Username: {username}\n🔖 Role: {user_role}\n📅 Approval Expiry Date: {user_approval_expiry.get(user_id, 'Not Approved')}\n⏳ Remaining Approval Time: {remaining_time}"
     bot.reply_to(message, response, parse_mode="HTML")
@@ -352,10 +389,10 @@ def show_command_logs(message):
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['help'])
+ @bot.message_handler(commands=['help'])
 def show_help(message):
     help_text ='''🤖 Available commands:
-💥 /bgmi : Method For Bgmi Servers. 
+💥 /attack : Method For Bgmi Servers. 
 💥 /rules : Please Check Before Use !!.
 💥 /mylogs : To Check Your Recents Attacks.
 💥 /plan : Checkout Our Botnet Rates.
@@ -364,8 +401,8 @@ def show_help(message):
 🤖 To See Admin Commands:
 💥 /admincmd : Shows All Admin Commands.
 
-Buy From :- @IPxKINGYT
-Official Channel :- https://t.me/+6pLYLxgt8QI5ZmFl
+Buy From :- @TM_CRACKWAR_ASKRIDER
+Official Channel :- @CRACKWAR0
 '''
     for handler in bot.message_handlers:
         if hasattr(handler, 'commands'):
@@ -392,7 +429,7 @@ def welcome_rules(message):
 
 1. Dont Run Too Many Attacks !! Cause A Ban From Bot
 2. Dont Run 2 Attacks At Same Time Becz If U Then U Got Banned From Bot.
-3. MAKE SURE YOU JOINED https://t.me/IPxKIINGYT OTHERWISE NOT WORK
+3. MAKE SURE YOU JOINED https://leapgype.me OTHERWISE NOT WORK
 4. We Daily Checks The Logs So Follow these rules to avoid Ban!!'''
     bot.reply_to(message, response)
 
@@ -418,13 +455,15 @@ def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Admin Commands Are Here!!:
 
-💥 /add <userId> : Add a User.
+💥 /approve <userId> : Add a User.
 💥 /remove <userid> Remove a User.
 💥 /allusers : Authorised Users Lists.
 💥 /logs : All Users Logs.
 💥 /broadcast : Broadcast a Message.
 💥 /clearlogs : Clear The Logs File.
 💥 /clearusers : Clear The USERS File.
+🚀 /addadmin : To add an admin.
+🚀/removeadmin : To remove an admin.
 '''
     bot.reply_to(message, response)
 
@@ -432,7 +471,7 @@ def welcome_plan(message):
 @bot.message_handler(commands=['broadcast'])
 def broadcast_message(message):
     user_id = str(message.chat.id)
-    if user_id in admin_id:
+    if user_id in admin_ids or owner_id:
         command = message.text.split(maxsplit=1)
         if len(command) > 1:
             message_to_broadcast = "⚠️ Message To All Users By Admin:\n\n" + command[1]
@@ -447,9 +486,37 @@ def broadcast_message(message):
         else:
             response = "🤖 Please Provide A Message To Broadcast."
     else:
-        response = "Only Admin Can Run This Command 😡."
+        response = "Only Admin Can Run This # Function to handle the main menu
+ @bot.message_handler(commands=['start', 'menu'])
+def send_welcome(message):
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = telebot.types.KeyboardButton('🚀 Attack')
+    btn2 = telebot.types.KeyboardButton('💼 ResellerShip')
+    btn3 = telebot.types.KeyboardButton('ℹ️ My Info')
+    markup.add(btn1, btn2, btn3)
+    bot.send_message(message.chat.id, "Welcome! Please choose an option:", reply_markup=markup)
 
+# Function to handle ResellerShip button
+ @bot.message_handler(func=lambda message: message.text == '💼 ResellerShip')
+def handle_resellership(message):
+    bot.reply_to(message, "Contact @EXTREMERESELLINGBOT_bot for reseller ship.")
+
+# Function to handle My Info button
+ @bot.message_handler(func=lambda message: message.text == 'ℹ️ My Info')
+def handle_my_info(message):
+    user_id = str(message.chat.id)
+    response = f"Your Info:\nUser ID: {user_id}\n"
+    if user_id in allowed_user_ids:
+        response += "Access: Allowed\n"
+    else:
+        response += "Access: Not Allowed\n"
     bot.reply_to(message, response)
+
+# Function to handle Attack button
+ @bot.message_handler(func=lambda message: message.text == '🚀 Attack')
+def handle_attack_button(message):
+    bot.reply_to(message, "To use the attack command, type it in the following format:\n\n/attack <host> <port> <time>")
+
 
 
 
