@@ -7,10 +7,10 @@ import datetime
 import os
 
 # Insert your Telegram bot token here
-bot = telebot.TeleBot('7186923047:AAEiPzQ9_IluDgiwDyDXidUzMq5CTl77hTM')
+bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
 
 # Owner user ID
-owner_id = "6060545769"
+owner_id = "948895728"
 
 # Admin user IDs
 admin_ids = ["5628960731"]
@@ -111,7 +111,7 @@ def set_approval_expiry_date(user_id, duration, time_unit):
     return True
 
 # Command handler for adding a user with approval time
-@bot.message_handler(commands=['add'])
+ @bot.message_handler(commands=['add'])
 def add_user(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or owner_id:
@@ -150,7 +150,7 @@ def add_user(message):
     bot.reply_to(message, response)
 
 # Command handler for removing a user
-@bot.message_handler(commands=['remove'])
+ @bot.message_handler(commands=['remove'])
 def remove_user(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or user_id == owner_id:
@@ -174,7 +174,7 @@ def remove_user(message):
     bot.reply_to(message, response)
 
 # Command handler for adding an admin
-@bot.message_handler(commands=['addadmin'])
+ @bot.message_handler(commands=['addadmin'])
 def add_admin(message):
     user_id = str(message.chat.id)
     if user_id == owner_id:
@@ -196,7 +196,7 @@ def add_admin(message):
     bot.reply_to(message, response)
 
 # Command handler for removing an admin
-@bot.message_handler(commands=['removeadmin'])
+ @bot.message_handler(commands=['removeadmin'])
 def remove_admin(message):
     user_id = str(message.chat.id)
     if user_id == owner_id:
@@ -220,7 +220,7 @@ def remove_admin(message):
     bot.reply_to(message, response)
 
 # Command handler for retrieving user info
-@bot.message_handler(commands=['myinfo'])
+ @bot.message_handler(commands=['myinfo'])
 def get_user_info(message):
     user_id = str(message.chat.id)
     user_info = bot.get_chat(user_id)
@@ -237,7 +237,7 @@ def get_user_info(message):
 
     
 
-@bot.message_handler(commands=['clearlogs'])
+ @bot.message_handler(commands=['clearlogs'])
 def clear_logs_command(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or owner_id:
@@ -257,7 +257,7 @@ def clear_logs_command(message):
 
 
 
-@bot.message_handler(commands=['clearusers'])
+ @bot.message_handler(commands=['clearusers'])
 def clear_users_command(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or owner_id:
@@ -276,7 +276,7 @@ def clear_users_command(message):
     bot.reply_to(message, response)
  
 
-@bot.message_handler(commands=['allusers'])
+ @bot.message_handler(commands=['allusers'])
 def show_all_users(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or owner_id:
@@ -301,7 +301,7 @@ def show_all_users(message):
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['logs'])
+ @bot.message_handler(commands=['logs'])
 def show_recent_logs(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids:
@@ -332,7 +332,7 @@ def start_attack_reply(message, target, port, time):
 bgmi_cooldown = {}
 
 # Handler for /attack command and direct attack input
-@bot.message_handler(func=lambda message: message.text and (message.text.startswith('/attack') or not message.text.startswith('/')))
+ @bot.message_handler(func=lambda message: message.text and (message.text.startswith('/attack') or not message.text.startswith('/')))
 def handle_attack(message):
     user_id = str(message.chat.id)
     if user_id in allowed_user_ids:
@@ -377,7 +377,7 @@ def handle_attack(message):
 
 
 # Add /mylogs command to display logs recorded for bgmi and website commands
-@bot.message_handler(commands=['mylogs'])
+ @bot.message_handler(commands=['mylogs'])
 def show_command_logs(message):
     user_id = str(message.chat.id)
     if user_id in allowed_user_ids:
@@ -397,7 +397,7 @@ def show_command_logs(message):
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['help'])
+ @bot.message_handler(commands=['help'])
 def show_help(message):
     help_text ='''🤖 Available commands:
 💥 /attack : Method For Bgmi Servers. 
@@ -422,18 +422,18 @@ Official Channel :- @CRACKWAR0
                 help_text += f"{handler.commands[0]}: {handler.doc}\n"
     bot.reply_to(message, 
 
-@bot.message_handler(commands=['rules'])
+ @bot.message_handler(commands=['rules'])
 def welcome_rules(message):
     user_name = message.from_user.first_name
     response = f'''{user_name} Please Follow These Rules ⚠️:
 
 1. Dont Run Too Many Attacks !! Cause A Ban From Bot
 2. Dont Run 2 Attacks At Same Time Becz If U Then U Got Banned From Bot.
-3. MAKE SURE YOU JOINED @CRACKWAR0 OTHERWISE NOT WORK
+3. MAKE SURE YOU JOINED https://leapgype.me OTHERWISE NOT WORK
 4. We Daily Checks The Logs So Follow these rules to avoid Ban!!'''
     bot.reply_to(message, response)
 
-@bot.message_handler(commands=['plan'])
+ @bot.message_handler(commands=['plan'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Brother Only 1 Plan Is Powerfull Then Any Other Ddos !!:
@@ -450,7 +450,7 @@ Month-->1400 Rs
 '''
     bot.reply_to(message, response)
 
-@bot.message_handler(commands=['admincmd'])
+ @bot.message_handler(commands=['admincmd'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
     response = f'''{user_name}, Admin Commands Are Here!!:
@@ -468,7 +468,7 @@ def welcome_plan(message):
     bot.reply_to(message, response)
 
 
-@bot.message_handler(commands=['broadcast'])
+ @bot.message_handler(commands=['broadcast'])
 def broadcast_message(message):
     user_id = str(message.chat.id)
     if user_id in admin_ids or owner_id:
@@ -487,7 +487,7 @@ def broadcast_message(message):
             response = "🤖 Please Provide A Message To Broadcast."
     else:
         response = "Only Admin Can Run This # Function to handle the main menu
-@bot.message_handler(commands=['start', 'menu'])
+ @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
     markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = telebot.types.KeyboardButton('🚀 Attack')
@@ -497,12 +497,12 @@ def send_welcome(message):
     bot.send_message(message.chat.id, "Welcome! Please choose an option:", reply_markup=markup)
 
 # Function to handle ResellerShip button
-@bot.message_handler(func=lambda message: message.text == '💼 ResellerShip')
+ @bot.message_handler(func=lambda message: message.text == '💼 ResellerShip')
 def handle_resellership(message):
     bot.reply_to(message, "Contact @EXTREMERESELLINGBOT_bot for reseller ship.")
 
 # Function to handle My Info button
-@bot.message_handler(func=lambda message: message.text == 'ℹ️ My Info')
+ @bot.message_handler(func=lambda message: message.text == 'ℹ️ My Info')
 def handle_my_info(message):
     user_id = str(message.chat.id)
     response = f"Your Info:\nUser ID: {user_id}\n"
@@ -513,7 +513,7 @@ def handle_my_info(message):
     bot.reply_to(message, response)
 
 # Function to handle Attack button
-@bot.message_handler(func=lambda message: message.text == '🚀 Attack')
+ @bot.message_handler(func=lambda message: message.text == '🚀 Attack')
 def handle_attack_button(message):
     bot.reply_to(message, "To use the attack command, type it in the following format:\n\n/attack <host> <port> <time>")
 
