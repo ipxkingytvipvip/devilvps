@@ -9,7 +9,7 @@ import os
 # insert your Telegram bot token here
 bot = telebot.TeleBot('7350883849:AAGkxJecRtQmEHFs2kFzf6zcDwi2i-PgAVs')
 # Admin user IDs
-admin_id = ["948895728","1712525673","1175384555"]
+admin_id = ["948895728","1712525673","1175384555","1881941753"]
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
