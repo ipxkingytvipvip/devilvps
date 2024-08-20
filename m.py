@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#nsr
 
 import telebot
 import subprocess
